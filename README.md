@@ -1,3 +1,4 @@
+# To-Do List App
 ## What is this project about?
 This project is about improving my skills as a web developer and practicing different aspects like front-end frameworks like React + Typescript, 
 back-end technologies like Node.js with Express, and Mongo databases.
@@ -5,7 +6,7 @@ back-end technologies like Node.js with Express, and Mongo databases.
 I focus on clean code, thorough testing, and comprehensive documentation. Strong version control practices are also essential. 
 My goal is to improve both my coding skills and the entire development lifecycle, from planning to deployment.
 
-# How to use this project?
+## How to use this project?
 1. Clona el repositorio
 
    ```sh
