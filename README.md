@@ -1,5 +1,5 @@
 
-<img src="https://github.com/avfonseca00/To-Do-App/blob/main/Design%20Desktop.png" alt="Logo" width="400px" />
+<img src="https://github.com/avfonseca00/To-Do-App/blob/main/Design%20Desktop.png" alt="Logo" width="800px" />
 
 # To-Do List App
 ## What is this project about?
