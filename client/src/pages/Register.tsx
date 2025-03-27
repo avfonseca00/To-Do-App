@@ -1,5 +1,4 @@
 import { Button, Container, Flex, Heading, HStack, Input, Separator, Text, VStack } from "@chakra-ui/react"
-import '../assets/css/register.css'
 import { Field } from "@/components/ui/field"
 import { useForm } from "react-hook-form"
 import { RiGoogleFill } from "react-icons/ri"
