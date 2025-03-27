@@ -38,11 +38,11 @@ const Register = () => {
       }, 3000);
 
     } catch (error) {
-      console.log(error)
+      console.log('error', error)
       return toaster.create({
-        title: error.response.data.message,
+        title: "An unknown error has ocurred",
         type: 'error',
-      }) 
+      })
     }
 
   });

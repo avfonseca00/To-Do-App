@@ -1,7 +1,7 @@
 import { Button, Container, Flex, Heading, HStack, Input, Separator, Text, VStack } from "@chakra-ui/react"
 import { Field } from "@/components/ui/field"
 import { useForm } from "react-hook-form"
-import {useNavigate} from 'react-router';
+import { useNavigate } from 'react-router';
 import { RiGoogleFill } from "react-icons/ri"
 import { PasswordInput } from "@/components/ui/password-input"
 import axios from "axios"
@@ -45,13 +45,11 @@ const Login = () => {
         navigate(`/dashboard/${response.data.data.user._id}`);
       }, 3000);
     } catch (error) {
-      console.log(error)
-      setLoading(false)
-      const e = error.response.data.message
-      return toaster.create({
-        title: e,
-        type: 'error',
-      }) 
+        console.log('error', error)
+        return toaster.create({
+          title: "An unknown error has ocurred",
+          type: 'error',
+        })
     }
 
   });
