@@ -1,5 +1,6 @@
 
-<img width="300px" src="https://github.com/avfonseca00/To-Do-App/blob/main/client/public/LogoIcon.svg" alt="Logo" width="400" />
+<img src="https://github.com/avfonseca00/To-Do-App/blob/main/Design%20Desktop.png" alt="Logo" width="400px" />
+
 # To-Do List App
 ## What is this project about?
 This project is about improving my skills as a web developer and practicing different aspects like front-end frameworks like React + Typescript, 
