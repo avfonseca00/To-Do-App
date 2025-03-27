@@ -30,12 +30,7 @@ const TasksList = ({user}: Props) => {
     });
     const [statusFilter, setStatusFilter] = useState<string[]>(()=>{
         const searchParams = new URLSearchParams(window.location.search)
-        if(searchParams.get('status')!==null){
-            console.log('statusParam', searchParams.get('status'))
-            return [searchParams.get('status')]
-        }else{
-            return []
-        }
+        return [searchParams.get('status') ?? '']; // provide a default value of empty string when null
     });
     const [pageData, setPageData] = useState({
         page: 1,  
@@ -94,14 +89,16 @@ console.log('searchResult', searchResult)
         tasks[index].status = tasks[index].status === taskStatus.Pending   
                                                     ? taskStatus.Completed   
                                                     : taskStatus.Pending;
-        const {_id, createdAt, updatedAt, ...rest} = task || {}
-        const taskObj = rest
-        taskObj.status = taskObj?.status === taskStatus.Pending   
-                                            ? taskStatus.Completed   
-                                            : taskStatus.Pending;
-        
+        if(task){
+        const {_id, createdAt, updatedAt, ...taskObj} = task
+        console.log(createdAt, updatedAt)
+        if (taskObj) {
+            (taskObj as { title: string; description: string; status: taskStatus; userId: string; }).status = (taskObj.status ?? taskStatus.Pending) === taskStatus.Pending
+            ? taskStatus.Completed
+            : taskStatus.Pending;
+        }
         await axios.put(`http://127.0.0.1:5000/api/tasks/${_id}`, taskObj)
-        
+        }
     }
 
     useEffect(() => {  
