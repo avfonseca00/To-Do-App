@@ -12,28 +12,10 @@ import { RiDraggable, RiMoreFill } from "react-icons/ri"
 import { Checkbox } from "@/components/ui/checkbox"
 import Pagination from "../Pagination"
 import { useDebounce } from '@uidotdev/usehooks'; 
+import { searchResponse, taskDataResponse, taskObject, taskStatus } from "@/types"
 
 type Props = {
     user?: string
-}
-enum taskStatus {
-    Pending = "pending",
-    Completed = "completed"
-}
-type taskObject = {
-    _id: string
-    title: string,
-    description: string,
-    status: taskStatus,
-    userId: string,
-    createdAt: string,
-    updatedAt: string
-}
-type searchResponse = {
-    data: Array<taskObject>,
-    page: number,
-    pageSize: number,
-    total: number
 }
 
 const TasksList = ({user}: Props) => {
@@ -129,7 +111,7 @@ console.log('searchResult', searchResult)
                 limit: '6'  
             });
             if(!searchResult&&(debouncedSearchTerm==='')){
-            const response = await axios.get<taskObject[]>(`http://127.0.0.1:5000/api/tasks/user/${user}`, {
+            const response = await axios.get<taskDataResponse>(`http://127.0.0.1:5000/api/tasks/user/${user}`, {
                 params
             });  
             const tasksData = response.data.data;
