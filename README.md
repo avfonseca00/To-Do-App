@@ -7,19 +7,18 @@ I focus on clean code, thorough testing, and comprehensive documentation. Strong
 My goal is to improve both my coding skills and the entire development lifecycle, from planning to deployment.
 
 ## How to use this project?
-1. Clona el repositorio
-
+1. Clone this repo
    ```sh
    git clone https://github.com/avfonseca00/To-Do-App.git
    ```
 
-2. Instala los paquetes de NPM
+2. Install NPM packages
 
    ```sh
    npm install
    ```
 
-3. Ejecuta el proyecto
+3. Launch the project
 
    ```sh
    npm run dev
