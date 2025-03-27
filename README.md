@@ -32,10 +32,10 @@ My goal is to improve both my coding skills and the entire development lifecycle
 </div>
 
 [contributors-shield]: https://img.shields.io/github/contributors/midudev/la-velada-web-oficial.svg?style=for-the-badge
-[contributors-url]: https://github.com/midudev/la-velada-web-oficial/graphs/contributors
+[contributors-url]: https://github.com/avfonseca00/To-Do-App/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/midudev/la-velada-web-oficial.svg?style=for-the-badge
-[forks-url]: https://github.com/midudev/la-velada-web-oficial/network/members
+[forks-url]: https://github.com/avfonseca00/To-Do-App/network/members
 [stars-shield]: https://img.shields.io/github/stars/midudev/la-velada-web-oficial.svg?style=for-the-badge
-[stars-url]: https://github.com/midudev/la-velada-web-oficial/stargazers
+[stars-url]: https://github.com/avfonseca00/To-Do-App/stargazers
 [issues-shield]: https://img.shields.io/github/issues/midudev/la-velada-web-oficial.svg?style=for-the-badge
-[issues-url]: https://github.com/midudev/la-velada-web-oficial/issues
+[issues-url]: https://github.com/avfonseca00/To-Do-App/issues
