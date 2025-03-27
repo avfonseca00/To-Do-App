@@ -31,11 +31,11 @@ My goal is to improve both my coding skills and the entire development lifecycle
 [![Issues][issues-shield]][issues-url]
 </div>
 
-[contributors-shield]: https://img.shields.io/github/contributors/midudev/la-velada-web-oficial.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/avfonseca00/To-Do-App.svg?style=for-the-badge
 [contributors-url]: https://github.com/avfonseca00/To-Do-App/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/midudev/la-velada-web-oficial.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/avfonseca00/To-Do-App.svg?style=for-the-badge
 [forks-url]: https://github.com/avfonseca00/To-Do-App/network/members
-[stars-shield]: https://img.shields.io/github/stars/midudev/la-velada-web-oficial.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/avfonseca00/To-Do-App.svg?style=for-the-badge
 [stars-url]: https://github.com/avfonseca00/To-Do-App/stargazers
-[issues-shield]: https://img.shields.io/github/issues/midudev/la-velada-web-oficial.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/avfonseca00/To-Do-App.svg?style=for-the-badge
 [issues-url]: https://github.com/avfonseca00/To-Do-App/issues
