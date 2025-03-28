@@ -90,8 +90,8 @@ console.log('searchResult', searchResult)
                                                     ? taskStatus.Completed   
                                                     : taskStatus.Pending;
         if(task){
-        const {_id, createdAt, updatedAt, ...taskObj} = task
-        console.log(createdAt, updatedAt)
+        const {_id, ...taskObj} = task
+        // console.log(createdAt, updatedAt)
         if (taskObj) {
             (taskObj as { title: string; description: string; status: taskStatus; userId: string; }).status = (taskObj.status ?? taskStatus.Pending) === taskStatus.Pending
             ? taskStatus.Completed
