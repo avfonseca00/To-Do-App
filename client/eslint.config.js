@@ -24,6 +24,18 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       'no-unused-vars': 'off', // Desactiva el error por variables sin usar
+      "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ]
     },
   },
 )
