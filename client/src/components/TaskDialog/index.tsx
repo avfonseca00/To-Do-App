@@ -71,7 +71,7 @@ const TaskDialog = () => {
                         <SelectTrigger>
                         <SelectValueText placeholder="Select a list to set your task" />
                         </SelectTrigger>
-                        <SelectContent portalRef={contentRef}>
+                        <SelectContent portalRef={contentRef as React.RefObject<HTMLElement>}>
                         {lists.items.map((item) => (
                             <SelectItem item={item} key={item.value}>
                             {item.label}
