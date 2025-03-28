@@ -8,7 +8,7 @@ import {
     Text,  
 } from '@chakra-ui/react'; 
 import { ClassNames } from '@emotion/react';  
-import { css as emotionCSS, SerializedStyles } from '@emotion/react';
+import { css, SerializedStyles, CSSObject } from '@emotion/react';
 import { InputGroup } from '../ui/input-group';
 import { RiArrowLeftSLine, RiArrowRightSLine, RiCalendarLine } from 'react-icons/ri';
 
@@ -79,10 +79,10 @@ const CustomHeader = ({
 
 function useDatePickerStyles() {  
     return useMemo(() => {  
-        const defaultStyles = {  
+        const defaultStyles: CSSObject = {  
         background: 'white',
         border: 'none', 
-        boxShadow: '0px 2px 8px color-mix(in srgb, #18181b 10%, transparent),0px 0px 1px color-mix(in srgb, #18181b 30%, transparent)',
+        boxShadow: '0px 2px 8px color-mix(in srgb, #18181b 10%, transparent), 0px 0px 1px color-mix(in srgb, #18181b 30%, transparent)',
             '& .react-datepicker': {  
                 '&__header': {  
                 backgroundColor: '#18181b',  
@@ -103,8 +103,9 @@ function useDatePickerStyles() {
                 height: '28px',  
                 borderRadius: '100%',  
                 }, 
-                '&__day--outside-month':{
-                    visibility: 'hidden!important'
+                '&__day--outside-month': {
+                    visibility: 'hidden',
+                    '!important': true
                 },
                 '&__day:not(.react-datepicker__day--selected, .react-datepicker__day--keyboard-selected):hover': {  
                 backgroundColor: 'white',
@@ -120,13 +121,13 @@ function useDatePickerStyles() {
                 fontWeight: '600',  
                 color: 'white',  
                 }, 
-                '&__day--selected:not([aria-disabled=true]):hover':{
+                '&__day--selected:not([aria-disabled=true]):hover': {
                     backgroundColor: '#18181b',
                     borderRadius: "100%"  
                 }
             }, 
         };     
-        return emotionCSS(defaultStyles);  
+        return css(defaultStyles);  
     }, []);  
 }  
 
