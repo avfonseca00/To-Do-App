@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@chakra-ui/color-mode": "^2.2.0",
-    "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^3.8.1",
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.7.9",
