@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, createListCollection, Flex, Heading, HStack, Icon, Input, Separator, Text, VStack } from "@chakra-ui/react"
+import { Button, createListCollection, Flex, Heading, HStack, Icon, Input, Separator, Text, Textarea, VStack } from "@chakra-ui/react"
 import {
     DialogActionTrigger,
     DialogBody,
@@ -20,6 +20,9 @@ import { SelectContent,
     SelectRoot, SelectTrigger, 
     SelectValueText } from "@/components/ui/select"
 import { DatePicker } from "../DatePicker"
+import { useForm } from "react-hook-form"
+import axios from "axios"
+import { BASE_URI } from "@/utils/constants"
 
 
 const lists = createListCollection({
@@ -31,10 +34,44 @@ const lists = createListCollection({
     ],
     })
 
-const TaskDialog = () => {
+    type dialogProps = {
+        userId: string,
+        taskCreated: boolean,
+        setTaskCreated: (newTask: boolean) => void,
+    }
+
+    type TaskFormValues = {  
+        title: string;
+        description: string;  
+        list: string;  
+        dueDate: Date;  
+    }; 
+
+const TaskDialog = ({userId, taskCreated, setTaskCreated}:dialogProps) => {
     const [open, setOpen] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
     const [date, setDate] = useState<Date>(new Date(Date.now()))
+    const { register, handleSubmit, reset } = useForm<TaskFormValues>(); // Usar useForm  
+
+    const onSubmit = async (data: TaskFormValues) => {  
+        try {  
+            const response = await axios.post(`${BASE_URI}/api/tasks`, {  
+                title: data.title,  
+                description: data.description,
+                // list: data.list,  
+                // dueDate: data.dueDate,  
+                status: "pending",
+                userId: userId
+            });  
+            console.log("Tarea creada:", response.data);  
+            setTaskCreated(!taskCreated)
+            reset(); // Limpiar el formulario después del envío  
+            setOpen(false); // Cierra el diálogo después de guardar  
+        } catch (error) {  
+            console.error("Error al crear la tarea:", error);  
+            // Manejo de error, podría mostrar un mensaje al usuario  
+        }  
+    };
 
     return (
         <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)}>
@@ -66,44 +103,69 @@ const TaskDialog = () => {
             <Separator />
             <DialogBody>
                 <VStack gap={5} w={'100%'} pt={'2'}>
-                    <SelectRoot collection={lists} size="md">
-                        <SelectLabel fontSize={'16px'} mb={'4px'} color={{base: 'gray.900', _dark: "gray.200"}}>Select a task list</SelectLabel>
-                        <SelectTrigger>
-                        <SelectValueText placeholder="Select a list to set your task" />
-                        </SelectTrigger>
-                        <SelectContent portalRef={contentRef as React.RefObject<HTMLElement>}>
-                        {lists.items.map((item) => (
-                            <SelectItem item={item} key={item.value}>
-                            {item.label}
-                            </SelectItem>
-                        ))}
-                        </SelectContent>
-                    </SelectRoot>
-                    <Field
-                        label="Task title"
-                        color={{base: 'gray.900', _dark: "gray.200"}}
-                    >
-                        <Input size={'md'} placeholder="Give a name to your task"
-                            // {...register("email", { required: "Last name is required" })}
-                        />
-                    </Field>
-                    <Field
-                        label="Date"
-                        color={{base: 'gray.900', _dark: "gray.200"}}
-                    >
-                        <DatePicker value={date} onChange={(date)=>{
-                            if(date!== null){
-                                setDate(date)
+                    <form 
+                        onSubmit={handleSubmit(onSubmit)} 
+                        id="taskForm" 
+                        style={
+                            {
+                                width:"100%",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: '18px'
                             }
-                        }}/>
-                    </Field>
+                        }
+                    >
+                        <SelectRoot collection={lists} size="md" {...register("list", { required: true })}>
+                            <SelectLabel fontSize={'16px'} mb={'4px'} color={{base: 'gray.900', _dark: "gray.200"}}>Select a task list</SelectLabel>
+                            <SelectTrigger>
+                            <SelectValueText placeholder="Select a list to set your task" />
+                            </SelectTrigger>
+                            <SelectContent portalRef={contentRef as React.RefObject<HTMLElement>}>
+                            {lists.items.map((item) => (
+                                <SelectItem item={item} key={item.value}>
+                                {item.label}
+                                </SelectItem>
+                            ))}
+                            </SelectContent>
+                        </SelectRoot>
+                        <Field
+                            label="Task title"
+                            color={{base: 'gray.900', _dark: "gray.200"}}
+                        >
+                            <Input size={'md'} placeholder="Choose a title to your task"
+                                {...register("title", { required: "Task title is required" })}
+                            />
+                        </Field>
+                        <Field
+                            label="Task description"
+                            color={{base: 'gray.900', _dark: "gray.200"}}
+                        >
+                            <Textarea 
+                                size={'md'} 
+                                placeholder="A brief of your task"
+                                height={'74px'}
+                                maxH={'74px'}
+                                {...register("description", { required: "Task description is required" })}
+                            />
+                        </Field>
+                        <Field
+                            label="Date"
+                            color={{base: 'gray.900', _dark: "gray.200"}}
+                        >
+                            <DatePicker value={date} onChange={(date)=>{
+                                if(date!== null){
+                                    setDate(date)
+                                }
+                            }}/>
+                        </Field>
+                    </form>
                 </VStack>
             </DialogBody>
             <DialogFooter>
             <DialogActionTrigger asChild>
                 <Button variant="outline" paddingInline={10} borderRadius={'lg'}>Cancel</Button>
             </DialogActionTrigger>
-            <Button paddingInline={10} borderRadius={'lg'}>Save</Button>
+            <Button type="submit" form={"taskForm"} paddingInline={10} borderRadius={'lg'}>Save</Button>
             </DialogFooter>
         </DialogContent>
         </DialogRoot>

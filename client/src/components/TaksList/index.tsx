@@ -22,6 +22,7 @@ type Props = {
 const TasksList = ({user}: Props) => {
     const [tasks, setTasks] = useState<taskObject[]>([])
     const [page, setPage] = useState<number>(1)
+    const [taskCreated, setTaskCreated] = useState<boolean>(false)
     const [searchPage, setSearchPage] = useState<number>(1)
     const [value, setValue] = useState<string>('asc')
     const [searchResult, setSearchResult] = useState<searchResponse | null>(null)
@@ -115,7 +116,7 @@ const TasksList = ({user}: Props) => {
                 page: page.toString(),  
                 limit: '6'  
             });
-            if(!searchResult&&(debouncedSearchTerm==='')){
+            if((!searchResult&&(debouncedSearchTerm===''))){
             const response = await axios.get<taskDataResponse>(`${BASE_URI}/api/tasks/user/${user}`, {
                 params
             });  
@@ -139,7 +140,7 @@ const TasksList = ({user}: Props) => {
             }, 1000);  
         }
         })();  
-    }, [user, page, searchResult, debouncedSearchTerm]);
+    }, [user, page, searchResult, debouncedSearchTerm, taskCreated]);
 
     return (
         <VStack w={"full"} gap={6}>
@@ -161,7 +162,7 @@ const TasksList = ({user}: Props) => {
                 </Field>
                 <FilterMenu status={statusFilter} setStatus={setStatusFilter}/>
                 <SortMenu value={value} setValue={setValue}/>
-                <TaskDialog/>
+                <TaskDialog userId={user!==undefined? user : ''} taskCreated={taskCreated} setTaskCreated={setTaskCreated}/>
             </Flex>
             {!(tasks.length>0)? (
                 <>
