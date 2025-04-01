@@ -9,6 +9,7 @@ import { toaster, Toaster } from "@/components/ui/toaster"
 import AuthLayout from "@/layouts/authLayout"
 import { useState } from "react";
 import { storeSession } from "@/utils/session";
+import { BASE_URI } from "@/utils/constants"
 
 interface FormValues {
   email: string
@@ -31,7 +32,7 @@ const Login = () => {
     // console.log(data)
     try {
       setLoading(true)
-      const response = await axios.post('http://127.0.0.1:5000/api/auth/login', data)
+      const response = await axios.post(`${BASE_URI}/api/auth/login`, data)
       console.log(response)
       storeSession(response.data.data.token)
       setTimeout(() => {

@@ -12,6 +12,7 @@ import { RiDraggable, RiMoreFill } from "react-icons/ri"
 import { Checkbox } from "@/components/ui/checkbox"
 import Pagination from "../Pagination"
 import { useDebounce } from '@uidotdev/usehooks'; 
+import { BASE_URI } from "@/utils/constants"
 import { searchResponse, taskDataResponse, taskObject, taskStatus } from "@/types"
 
 type Props = {
@@ -41,7 +42,7 @@ const TasksList = ({user}: Props) => {
     const [checkedArray, setCheckedArray] = useState<string[]>([])
 
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
-console.log('searchResult', searchResult)
+// console.log('searchResult', searchResult)
     useEffect(() => {
         (async()=>{
         const newPathname = debouncedSearchTerm === '' 
@@ -56,9 +57,9 @@ console.log('searchResult', searchResult)
             page: searchPage.toString(),
             pageSize: '6'
         })
-        console.log('debouncedSearchTerm', debouncedSearchTerm)
+        // console.log('debouncedSearchTerm', debouncedSearchTerm)
         if(debouncedSearchTerm){
-            const data = await axios.get<searchResponse>(`http://127.0.0.1:5000/api/tasks/search/${user}`, {params})
+            const data = await axios.get<searchResponse>(`${BASE_URI}/api/tasks/search/${user}`, {params})
             setSearchResult(data.data)
             setTasks(data.data.data)
             setSearchPage(data.data.page)
@@ -90,14 +91,21 @@ console.log('searchResult', searchResult)
                                                     ? taskStatus.Completed   
                                                     : taskStatus.Pending;
         if(task){
-        const {_id, ...taskObj} = task
-        // console.log(createdAt, updatedAt)
+        const {_id, createdAt, updatedAt, ...taskObj} = task
+        console.log('taskObj', task)
+        
         if (taskObj) {
-            (taskObj as { title: string; description: string; status: taskStatus; userId: string; }).status = (taskObj.status ?? taskStatus.Pending) === taskStatus.Pending
-            ? taskStatus.Completed
-            : taskStatus.Pending;
+            (taskObj as { 
+                title: string; 
+                description: string; 
+                status: taskStatus; 
+                userId: string; 
+            }).status = (taskObj.status ?? taskStatus.Pending) === taskStatus.Pending
+                                                            ? taskStatus.Completed
+                                                            : taskStatus.Pending;
+            console.log('taskObj', taskObj)
         }
-        await axios.put(`http://127.0.0.1:5000/api/tasks/${_id}`, taskObj)
+        await axios.put(`${BASE_URI}/api/tasks/${_id}`, taskObj)
         }
     }
 
@@ -108,7 +116,7 @@ console.log('searchResult', searchResult)
                 limit: '6'  
             });
             if(!searchResult&&(debouncedSearchTerm==='')){
-            const response = await axios.get<taskDataResponse>(`http://127.0.0.1:5000/api/tasks/user/${user}`, {
+            const response = await axios.get<taskDataResponse>(`${BASE_URI}/api/tasks/user/${user}`, {
                 params
             });  
             const tasksData = response.data.data;
@@ -123,7 +131,7 @@ console.log('searchResult', searchResult)
             const completedTaskIds = tasksData  
                 .filter(task => task.status[0] === taskStatus.Completed)  
                 .map(task => task._id);  
-                console.log('completedTaskIds', completedTaskIds)
+                // console.log('completedTaskIds', completedTaskIds)
             setCheckedArray(completedTaskIds);  
     
             setTimeout(() => {  

@@ -7,6 +7,7 @@ import axios from "axios"
 import { toaster, Toaster } from "@/components/ui/toaster"
 import AuthLayout from "@/layouts/authLayout"
 import { useNavigate } from "react-router-dom"
+import { BASE_URI } from "@/utils/constants"
 
 interface FormValues {
   name: string
@@ -28,7 +29,7 @@ const Register = () => {
 
     // console.log(data)
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/auth/register', data)
+      const response = await axios.post(`${BASE_URI}/api/auth/register`, data)
       toaster.create({
         title: response.data.message,
         type: 'success',

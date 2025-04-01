@@ -8,6 +8,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { RiFunctionLine } from "react-icons/ri"
 import { useParams } from "react-router-dom"
+import { BASE_URI } from "@/utils/constants"
 
 const Dashboard = () => {
 
@@ -18,7 +19,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
     (async()=>{
-    const user = await axios.get(`http://127.0.0.1:5000/api/users/${userId}`)
+    const user = await axios.get(`${BASE_URI}/api/users/${userId}`)
       setUser(user.data.data.name);
       console.log(user)
   })()}, [userId])
