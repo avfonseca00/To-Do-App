@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/mongoDB')
 
 const FRONT_URI = process.env.CLIENT_URI
+const PORT = process.env.SERVER_PORT;
 
 const app = express();
 app.use(express.json())
@@ -14,7 +15,7 @@ app.use(cors({
     credentials: true // Si estás usando cookies, sesión o autorización básica  
 }));
 
-const PORT = process.env.SERVER_PORT;
+app.options('*', cors());
 
 app.use('/api', require('./routes'))
 
