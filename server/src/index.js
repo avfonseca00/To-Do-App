@@ -7,8 +7,11 @@ const FRONT_URI = process.env.CLIENT_URI
 
 const app = express();
 app.use(express.json())
-app.use(cors({
-    origin: FRONT_URI
+app.use(cors({  
+    origin: FRONT_URI,  
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos  
+    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos  
+    credentials: true // Si estás usando cookies, sesión o autorización básica  
 }));
 
 const PORT = process.env.SERVER_PORT;
