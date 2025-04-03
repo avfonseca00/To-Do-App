@@ -8,6 +8,7 @@ import { toaster, Toaster } from "@/components/ui/toaster"
 import AuthLayout from "@/layouts/authLayout"
 import { useNavigate } from "react-router-dom"
 import { BASE_URI } from "@/utils/constants"
+import { useColorMode } from "@/components/ui/color-mode"
 
 interface FormValues {
   name: string
@@ -24,6 +25,7 @@ const Register = () => {
   } = useForm<FormValues>()
 
   const navigate = useNavigate()
+    const { colorMode } = useColorMode();
 
   const onSubmit = handleSubmit(async(data) => {
 
@@ -33,7 +35,8 @@ const Register = () => {
       toaster.create({
         title: response.data.message,
         type: 'success',
-      })      
+      })
+            
       setTimeout(() => {
         navigate(`/login`);
       }, 3000);
@@ -50,14 +53,14 @@ const Register = () => {
 
   return (
     <AuthLayout>
-      <Flex flex={1.2} justify={"center"} paddingBlock={{base: 12, md: 24}}>
+      <Flex flex={1.2} justify={"center"} paddingBlock={{base: 12, md: 24}} bgColor={colorMode==='light'? 'gray.50':'gray.950'}>
         <Container paddingInline={{base: 4, md: 6, lg: 8}} maxW={'md'}>
           <VStack gap={8}>
             <VStack gap={2}>
               <Heading size={{base: '2xl', md:'3xl'}}>Create an account</Heading>
               <Text color={'fg.muted'}>Start creating your tasks</Text>
             </VStack>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} style={{width:'100%'}}>
               <VStack gap={6}>
                 <VStack gap={5} w={'100%'}>
                   <Field

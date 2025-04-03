@@ -10,6 +10,7 @@ import AuthLayout from "@/layouts/authLayout"
 import { useState } from "react";
 import { storeSession } from "@/utils/session";
 import { BASE_URI } from "@/utils/constants"
+import { useColorMode } from "@/components/ui/color-mode";
 
 interface FormValues {
   email: string
@@ -25,6 +26,7 @@ const Login = () => {
   } = useForm<FormValues>()
 
   const navigate = useNavigate()
+  const { colorMode } = useColorMode();
   const [loading, setLoading] = useState(false)
 
   const onSubmit = handleSubmit(async(data) => {
@@ -57,14 +59,14 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <Flex flex={1.2} justify={"center"} paddingBlock={{base: 24, md: 32}}>
+      <Flex flex={1.2} justify={"center"} paddingBlock={{base: 24, md: 32}} bgColor={colorMode==='light'? 'gray.50':'gray.950'}>
         <Container paddingInline={{base: 4, md: 6, lg: 8}} maxW={'md'}>
           <VStack gap={8}>
             <VStack gap={2}>
               <Heading size={{base: '2xl', md:'3xl'}}>Sign in</Heading>
               <Text color={'fg.muted'}>Sign in to your session</Text>
             </VStack>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} style={{width:'100%'}}>
               <VStack gap={6}>
                 <VStack gap={5} w={'100%'}>
                   <Field
