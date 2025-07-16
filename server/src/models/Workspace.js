@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const WorkspaceSchema = new mongoose.Schema({
     name: String,
-    description: String,
+    color: String,
 },
 {
     timestamps: true,

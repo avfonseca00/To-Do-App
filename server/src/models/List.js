@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const ListSchema = new mongoose.Schema({
     title: String,
-    userId: Number,
-    workspaceId: Number,
+    userId: String,
+    workspaceId: String,
 },
 {
     timestamps: true,
