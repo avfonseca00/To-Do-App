@@ -27,7 +27,7 @@ const ListItem = ({title, items, selected = false, workspace = false, color = '#
                 }}
             >
             <Flex align={"center"} gap={3}>
-                <RiDraggable color="gray"/>
+                <RiDraggable color="gray" style={{cursor: 'move'}}/>
                 {workspace && <RiSquareLine color={color}/>}
                 <Text textStyle={'md'} color={{base:"gray.900", _dark: "gray.300"}}>{title}</Text>
             </Flex>

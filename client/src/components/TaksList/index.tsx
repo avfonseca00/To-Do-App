@@ -217,7 +217,7 @@ const TasksList = ({user}: Props) => {
                             }
                         }}
                     >
-                        <List.Indicator display={"flex"} alignItems={"center"}><RiDraggable color={"gray"}/></List.Indicator>
+                        <List.Indicator display={"flex"} alignItems={"center"}><RiDraggable color={"gray"} style={{cursor: 'move'}}/></List.Indicator>
                         <HStack align={'center'} justify={"space-between"} w={"full"}>
                             <Flex gap={4} flex={1}>
                             <Checkbox  
