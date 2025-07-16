@@ -17,6 +17,26 @@ const Dashboard = () => {
   const [user, setUser] = useState('')
   const { colorMode } = useColorMode();
 
+  const actualDate = new Date();
+  let greeting =''
+
+  if(actualDate.getHours() >= 12 && actualDate.getHours() <= 20){
+    greeting = 'Afternoon'
+  } else if(actualDate.getHours() >= 13 && actualDate.getHours() <= 23){
+    greeting = 'Evening'
+  }else{
+    greeting = 'Morning'
+  }
+
+  const formatOptions: Intl.DateTimeFormatOptions = { 
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+
+  const formatDate = actualDate.toLocaleDateString('en-US', formatOptions);
+
   useEffect(()=>{
     (async()=>{
     const user = await axios.get(`${BASE_URI}/api/users/${userId}`)
@@ -31,7 +51,7 @@ const Dashboard = () => {
       <VStack 
         w={'365px'} 
         align={'start'} 
-        p={'30px'} 
+        p={'30px'}
         bgColor={
           {
             base: 'gray.50', 
@@ -69,8 +89,8 @@ const Dashboard = () => {
       <VStack flex={1} align={'start'} paddingBlockStart={'40px'} paddingInline={'75px'} gap={6} bgColor={{base: "white", _dark: "gray.950"}}>
         <Flex justify={"space-between"} w={"full"}>
           <VStack align={'start'}>
-            <Heading size={'3xl'}>Good Evening, {user}</Heading>
-            <Text textStyle={'lg'} color={{base:"gray.700", _dark: "gray.400"}}>It's Monday, 25 September 2024</Text>
+            <Heading size={'3xl'}>{`Good ${greeting}`}, {user}</Heading>
+            <Text textStyle={'lg'} color={{base:"gray.700", _dark: "gray.400"}}>{`It's ${formatDate}`}</Text>
           </VStack>
           <HStack>
             <IconButton variant={'ghost'}>
